@@ -14,9 +14,9 @@
     <form th:object="${newUser}" method="post">
 
         <div class="row">
-            <label>Username</label>
+            <label th:for="username">Username</label>
             <input th:field="*{username}"/>
-            <span th:errors="*{username}" th:class="error"></span>
+            <span th:errors="*{username}" class="error"></span>
         </div>
         <br/>
 

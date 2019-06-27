@@ -29,7 +29,9 @@ public class AuthenticationController {
     public String registerProcess(Model model, User user, Errors errors){
 
         if (errors.hasErrors()){
-            return "redirect:/account/register";
+            model.addAttribute("title","Register");
+            model.addAttribute("newUser",new User());
+            return "register";
         } else {
 
             userDao.save(user);
