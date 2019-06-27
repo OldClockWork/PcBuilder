@@ -56,9 +56,17 @@ public class AdminController {
     @RequestMapping(value = "add-item",  method = RequestMethod.POST)
     public String addItemProcess(Model model,
                                  @RequestParam hardwareType hardwareEnums,
-                                 @ModelAttribute @Valid Cpu cpu){
+                                 Cpu cpu,
+                                 CpuCooler cpuCooler){
 
-        cpuDao.save(cpu);
+        switch (hardwareEnums){
+            case CPU:
+                cpuDao.save(cpu);
+                break;
+            case CPU_COOLER:
+                cpuCoolerDao.save(cpuCooler);
+                break;
+        }
         return "redirect:/admin/new-item";
     }
 }
