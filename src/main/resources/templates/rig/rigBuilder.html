@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8"/>
+
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container">
+
+
+    <h1 th:text="${title}">default</h1>
+
+    <form th:object="${rigForm}" method="post">
+
+        <table class="table">
+            <div th:each="hardware : ${hardwareType}">
+                <tbody>
+                <tr>
+                    <td><a th:href="@{/buildRig/add-hardware(rigId=${rigId} , hardwareEnums=${hardware})}"
+                           th:text=" 'Select ' + ${hardware.name}"></a></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </div>
+        </table>
+
+        <!--  TABLE1 -->
+        <br/>
+
+        <table class="table table-sm">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Component</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="items : ${rigItems.cpu}">
+                <th scope="row">CPU</th>
+                <td th:text="${items.name}"></td>
+                <td th:text="${items.itemPrice} + '$'"></td>
+            </tr>
+
+            <tr th:each="items : ${rigItems.cpuCooler}">
+                <th scope="row">CPU Cooler</th>
+                <td th:text="${items.name}"></td>
+                <td th:text="${items.itemPrice} + '$'"></td>
+            </tr>
+            </tbody>
+        </table>
+        <!--  TABLE1 -->
+
+        <hr/>
+
+        <table>
+            <tr>
+            <th scope="row">Total Price:</th>
+            <td th:text="${totalPrice} + '$'"></td>
+            </tr>
+        </table>
+
+        <br/>
+        <input type="submit" value="Add to Wishlist"/>
+    </form>
+</div>
+</body>
+</html>

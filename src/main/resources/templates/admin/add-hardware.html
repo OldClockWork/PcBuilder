@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8"/>
+
+</head>
+<body>
+
+
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container">
+
+
+    <h1 th:text="${title}">default</h1>
+
+    <form th:object="${Component}" method="post" >
+        <label>Name</label>
+        <input th:field="*{name}"/>
+        <br/>
+
+        <label>Price</label>
+        <input th:field="*{itemPrice}" />
+        <br/>
+
+        <label>Effects</label>
+        <input th:field="*{effectWhat}" />
+        <br/>
+
+        <label>Value</label>
+        <input th:field="*{pcValue}" />
+        <br/>
+
+        <input type="submit" value="Add" />
+    </form>
+
+</div>
+</body>
+</html>

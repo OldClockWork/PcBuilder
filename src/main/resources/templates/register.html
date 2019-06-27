@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+
+
+
+<div class="container">
+    <h1 th:text="${title}"></h1>
+
+    <form th:object="${newUser}" method="post">
+
+        <div class="row">
+            <label>Email</label>
+            <input th:field="*{email}"/>
+        </div>
+        <br/>
+
+        <div class="row">
+            <label>Password</label>
+            <input type="password" th:field="*{password}"/>
+        </div>
+        <br/>
+
+        <div class="row">
+            <label>Re-password</label>
+            <input type="password"/>
+        </div>
+        <br/>
+
+        <input type="submit" value="Register" />
+    </form>
+</div>
+
+</body>
+</html>
