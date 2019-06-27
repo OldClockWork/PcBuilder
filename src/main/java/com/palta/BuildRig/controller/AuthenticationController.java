@@ -1,8 +1,11 @@
 package com.palta.BuildRig.controller;
 
 import com.palta.BuildRig.Models.User;
+import com.palta.BuildRig.data.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -10,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "account")
 public class AuthenticationController {
 
+
+    @Autowired
+    UserDao userDao;
 
     @RequestMapping(value = "register", method = RequestMethod.GET)
     public String register(Model model){
@@ -20,10 +26,16 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String registerProcess(Model model){
+    public String registerProcess(Model model, User user, Errors errors){
 
+        if (errors.hasErrors()){
+            return "redirect:/account/register";
+        } else {
 
-        return "redirect:/login";
+            userDao.save(user);
+            return "redirect:/buildRig";
+        }
+
     }
 
     @RequestMapping(value = "login", method = RequestMethod.GET)

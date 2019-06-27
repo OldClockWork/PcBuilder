@@ -14,8 +14,9 @@
     <form th:object="${newUser}" method="post">
 
         <div class="row">
-            <label>Email</label>
-            <input th:field="*{email}"/>
+            <label>Username</label>
+            <input th:field="*{username}"/>
+            <span th:errors="*{username}" th:class="error"></span>
         </div>
         <br/>
 
@@ -27,7 +28,13 @@
 
         <div class="row">
             <label>Re-password</label>
-            <input type="password"/>
+            <input type="password" class="passVal"/>
+        </div>
+        <br/>
+
+        <div class="row">
+            <label>Email</label>
+            <input th:field="*{email}"/>
         </div>
         <br/>
 
