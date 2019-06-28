@@ -18,6 +18,7 @@
         <tr>
             <th scope="col">Name</th>
             <th scope="col">Price</th>
+            <th scope="col" th:text="${symbol}"></th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -28,6 +29,7 @@
                 <form>
                     <td th:text="${hardwareItem.name}"></td>
                     <td th:text="${hardwareItem.itemPrice}"></td>
+                    <td th:unless="${hardwareItem.pcValue} == 0" th:text="${hardwareItem.pcValue}"></td>
                     <td><a th:href="@{/buildRig/add-hardware-process(hardwareId=${hardwareItem.id}, rigId=${foundRig.id}, hardwareEnums=${Hardware})}" th:text="Select"></a></td>
                 </form>
             </tr>

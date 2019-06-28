@@ -8,18 +8,20 @@
 
 <div class="container">
 
-    <form>
+    <h1 th:text="${title}"></h1>
 
+    <form th:object="${userLogin}" method="post">
         <div class="row">
-            <label>Username</label>
-            <input type="text"/>
+            <label>Email</label>
+            <input type="text" required="required"/>
         </div>
 
         <div class="row">
             <label>Password</label>
-            <input type="password"/>
+            <input type="password" required="required"/>
         </div>
 
+        <input type="submit" value="login" />
     </form>
 
 </div>

@@ -1,11 +1,7 @@
 package com.palta.BuildRig.controller;
 
-import com.palta.BuildRig.Models.Cpu;
-import com.palta.BuildRig.Models.CpuCooler;
-import com.palta.BuildRig.Models.Rig;
-import com.palta.BuildRig.data.CpuCoolerDao;
-import com.palta.BuildRig.data.CpuDao;
-import com.palta.BuildRig.data.RigDao;
+import com.palta.BuildRig.Models.*;
+import com.palta.BuildRig.data.*;
 import com.palta.BuildRig.forms.hardwareType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -25,6 +22,12 @@ public class BuildController {
     CpuDao cpuDao;
     @Autowired
     CpuCoolerDao cpuCoolerDao;
+    @Autowired
+    MemoryDao memoryDao;
+    @Autowired
+    MotherBoardDao motherBoardDao;
+    @Autowired
+    UserDao userDao;
 
 
 
@@ -48,7 +51,8 @@ public class BuildController {
 
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String add(Model model, @ModelAttribute @Valid Rig rig) {
+    public String add(Model model, @ModelAttribute @Valid Rig rig, HttpSession session) {
+
 
         rigDao.save(rig);
         return "redirect:/buildRig/rig/" + rig.getId();
@@ -61,19 +65,7 @@ public class BuildController {
         hardwareType[] hardwareEnums = hardwareType.values();
         Rig foundRig = rigDao.findOne(rigId);
 
-        int Price = 0;
-
-
-
-        if (foundRig.getCpu() != null){
-            Price += foundRig.getCpu().getItemPrice();
-        }
-        if (foundRig.getCpuCooler() != null){
-            Price += foundRig.getCpuCooler().getItemPrice();
-        }
-
-
-        model.addAttribute("totalPrice",Price);
+        model.addAttribute("totalPrice",foundRig.getPrice());
         model.addAttribute("rigItems",foundRig);
         model.addAttribute("title", "Build-a-rig");
         model.addAttribute("hardwareType", hardwareEnums);
@@ -93,11 +85,23 @@ public class BuildController {
             case CPU:
                 Iterable<Cpu> allCpu = cpuDao.findAll();
                 model.addAttribute("findHardware", allCpu);
+                model.addAttribute("symbol","GHz");
                 break;
 
             case CPU_COOLER:
                 Iterable<CpuCooler> allCpuCooler = cpuCoolerDao.findAll();
                 model.addAttribute("findHardware", allCpuCooler);
+                break;
+
+            case MEMORY:
+                Iterable<Memory> allMemory = memoryDao.findAll();
+                model.addAttribute("findHardware", allMemory);
+                model.addAttribute("symbol","TB");
+                break;
+
+            case MOTHERBOARD:
+                Iterable<MotherBoard> allMotherBoard = motherBoardDao.findAll();
+                model.addAttribute("findHardware", allMotherBoard);
                 break;
         }
 
@@ -111,6 +115,7 @@ public class BuildController {
                                 @RequestParam hardwareType hardwareEnums){
 
         Rig rig = rigDao.findOne(rigId);
+
         switch (hardwareEnums){
             case CPU:
             Cpu cpu = cpuDao.findOne(hardwareId);
@@ -121,15 +126,33 @@ public class BuildController {
             CpuCooler cpuCooler = cpuCoolerDao.findOne(hardwareId);
             rig.setCpuCooler(cpuCooler);
             break;
+
+            case MEMORY:
+            Memory memory = memoryDao.findOne(hardwareId);
+            rig.setMemory(memory);
+            break;
+
+            case MOTHERBOARD:
+            MotherBoard motherBoard = motherBoardDao.findOne(hardwareId);
+            rig.setMotherBoard(motherBoard);
+            break;
         }
 
         int Price = 0;
+//----------------------------------------------------------ADD PRICES
         if (rig.getCpu() != null){
             Price += rig.getCpu().getItemPrice();
         }
         if (rig.getCpuCooler() != null){
             Price += rig.getCpuCooler().getItemPrice();
         }
+        if (rig.getMemory() != null){
+            Price += rig.getMemory().getItemPrice();
+        }
+        if (rig.getMotherBoard() != null){
+            Price += rig.getMotherBoard().getItemPrice();
+        }
+//----------------------------------------------------------ADD PRICES
 
         rig.setPrice(Price);
         rigDao.save(rig);

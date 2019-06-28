@@ -3,8 +3,12 @@ package com.palta.BuildRig.controller;
 
 import com.palta.BuildRig.Models.Cpu;
 import com.palta.BuildRig.Models.CpuCooler;
+import com.palta.BuildRig.Models.Memory;
+import com.palta.BuildRig.Models.MotherBoard;
 import com.palta.BuildRig.data.CpuCoolerDao;
 import com.palta.BuildRig.data.CpuDao;
+import com.palta.BuildRig.data.MemoryDao;
+import com.palta.BuildRig.data.MotherBoardDao;
 import com.palta.BuildRig.forms.hardwareType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +28,10 @@ public class AdminController {
     CpuDao cpuDao;
     @Autowired
     CpuCoolerDao cpuCoolerDao;
+    @Autowired
+    MemoryDao memoryDao;
+    @Autowired
+    MotherBoardDao motherBoardDao;
 
     @RequestMapping(value = "new-item", method = RequestMethod.GET)
     public String newItem(Model model){
@@ -46,6 +54,12 @@ public class AdminController {
             case CPU_COOLER:
                 model.addAttribute("Component",new CpuCooler());
                 break;
+            case MEMORY:
+                model.addAttribute("Component",new Memory());
+                break;
+            case MOTHERBOARD:
+                model.addAttribute("Component",new MotherBoard());
+                break;
         }
 
         return "admin/add-hardware";
@@ -55,8 +69,10 @@ public class AdminController {
     @RequestMapping(value = "add-item",  method = RequestMethod.POST)
     public String addItemProcess(Model model,
                                  @RequestParam hardwareType hardwareEnums,
-                                 @Valid Cpu cpu,
-                                 @Valid CpuCooler cpuCooler){
+                                  Cpu cpu,
+                                  CpuCooler cpuCooler,
+                                  Memory memory,
+                                  MotherBoard motherBoard){
 
         switch (hardwareEnums){
             case CPU:
@@ -64,6 +80,13 @@ public class AdminController {
                 break;
             case CPU_COOLER:
                 cpuCoolerDao.save(cpuCooler);
+                break;
+            case MEMORY:
+                memoryDao.save(memory);
+                break;
+
+            case MOTHERBOARD:
+                motherBoardDao.save(motherBoard);
                 break;
         }
         return "redirect:/admin/new-item";

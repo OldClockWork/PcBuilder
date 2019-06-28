@@ -51,6 +51,18 @@
                 <td th:text="${items.name}"></td>
                 <td th:text="${items.itemPrice} + '$'"></td>
             </tr>
+
+            <tr th:each="items : ${rigItems.memory}">
+                <th scope="row">Memory</th>
+                <td th:text="${items.name}"></td>
+                <td th:text="${items.itemPrice} + '$'"></td>
+            </tr>
+
+            <tr th:each="items : ${rigItems.motherBoard}">
+                <th scope="row">Motherboard</th>
+                <td th:text="${items.name}"></td>
+                <td th:text="${items.itemPrice} + '$'"></td>
+            </tr>
             </tbody>
         </table>
         <!--  TABLE1 -->

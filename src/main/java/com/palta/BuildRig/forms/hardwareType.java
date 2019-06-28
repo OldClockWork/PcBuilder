@@ -14,7 +14,7 @@ public enum hardwareType {
     OPERATING_SYSTEM("Operating System"),
     SOFTWARE("Software"),
     MONITOR("Monitor"),
-    EXTERNAL_STORAGE("External");
+    EXTERNAL_STORAGE("External Storage");
 
     private final String name;
 

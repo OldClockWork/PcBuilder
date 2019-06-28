@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container">
+
+    <h1 th:text="${title}"></h1>
+    <br/>
+    <br/>
+
+
+    <table class="table">
+
+
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Components</th>
+            <th scope="col">Price</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:unless="${rigParts.cpu} == null">
+            <th scope="row" th:text="${rigParts.cpu.name}"></th>
+            <td th:text="${rigParts.cpu.itemPrice} + '$'"></td>
+            <td th:text="${rigParts.cpu.pcValue} + 'GHz'"></td>
+        </tr>
+
+        <tr th:unless="${rigParts.cpuCooler} == null">
+            <th scope="row" th:text="${rigParts.cpuCooler.name}"></th>
+            <td th:text="${rigParts.cpuCooler.itemPrice} + '$'"></td>
+            <td></td>
+        </tr>
+
+        <tr th:unless="${rigParts.motherBoard} == null">
+            <th scope="row" th:text="${rigParts.motherBoard.name}"></th>
+            <td th:text="${rigParts.motherBoard.itemPrice} + '$'"></td>
+            <td></td>
+        </tr>
+
+        <tr th:unless="${rigParts.memory} == null">
+            <th scope="row" th:text="${rigParts.memory.name}"></th>
+            <td th:text="${rigParts.memory.itemPrice} + '$'"></td>
+            <td th:text="${rigParts.memory.pcValue} + 'TB'"></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+
+</div>
+
+
+</body>
+</html>

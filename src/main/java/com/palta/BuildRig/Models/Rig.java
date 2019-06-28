@@ -23,10 +23,11 @@ public class Rig {
     private CpuCooler cpuCooler;
 
 
-//    @NotNull
-//    private MotherBoard motherBoard;
-//    @NotNull
-//    private Memory memory;
+    @ManyToOne
+    private MotherBoard motherBoard;
+    @ManyToOne
+    private Memory memory;
+
 //    @NotNull
 //    private Storage storage;
 //    @NotNull
@@ -111,5 +112,21 @@ public class Rig {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public MotherBoard getMotherBoard() {
+        return motherBoard;
+    }
+
+    public void setMotherBoard(MotherBoard motherBoard) {
+        this.motherBoard = motherBoard;
+    }
+
+    public Memory getMemory() {
+        return memory;
+    }
+
+    public void setMemory(Memory memory) {
+        this.memory = memory;
     }
 }

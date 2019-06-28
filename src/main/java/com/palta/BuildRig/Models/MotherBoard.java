@@ -1,12 +1,11 @@
 package com.palta.BuildRig.Models;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-
 @Entity
-public class Cpu {
-
+public class MotherBoard {
 
     @Id
     @GeneratedValue
@@ -18,9 +17,9 @@ public class Cpu {
     private double pcValue;
 
 
-    public Cpu() {}
+    public MotherBoard() {}
 
-    public Cpu(String name, int itemPrice, String effectWhat, double pcValue) {
+    public MotherBoard(String name, int itemPrice, String effectWhat, double pcValue) {
         this();
         this.name = name;
         this.itemPrice = itemPrice;
@@ -64,5 +63,3 @@ public class Cpu {
         return id;
     }
 }
-
-
