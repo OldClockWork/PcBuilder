@@ -2,11 +2,11 @@ package com.palta.BuildRig.controller;
 
 import com.palta.BuildRig.Models.User;
 import com.palta.BuildRig.data.UserDao;
-import org.hibernate.validator.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,22 +24,37 @@ public class AuthenticationController {
     @RequestMapping(value = "register", method = RequestMethod.GET)
     public String register(Model model){
 
+        model.addAttribute(new User());
         model.addAttribute("title","Register");
-        model.addAttribute("newUser",new User());
         return "register";
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String registerProcess(Model model, User user, Errors errors){
+    public String registerProcess(Model model, @ModelAttribute @Valid User user, Errors errors, HttpSession session){
 
         if (errors.hasErrors()){
             model.addAttribute("title","Register");
-            model.addAttribute("newUser",new User());
             return "register";
-        } else {
-            userDao.save(user);
-            return "redirect:/buildRig";
         }
+
+        User emailCheck = userDao.findByEmail(user.getEmail());
+        User nameCheck = userDao.findByUsername(user.getUsername());
+
+        if (emailCheck != null){
+            model.addAttribute("title","Register");
+            model.addAttribute("emailError","Email is already in use");
+            return "register";
+        }
+
+        if (nameCheck != null){
+            model.addAttribute("title","Register");
+            model.addAttribute("userError","Name is already in use");
+            return "register";
+        }
+
+        userDao.save(user);
+        session.setAttribute("currentUser", user.getEmail());
+        return "redirect:/buildRig";
 
     }
 
@@ -53,13 +68,18 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String loginProcess(HttpSession session, @Valid User user){
+    public String loginProcess(HttpSession session, User user){
+
 
         User theUser = userDao.findByEmail(user.getEmail());
-        session.setAttribute("currentUser", theUser);
 
+        if (theUser.equals(null)){
+            return "login";
+        } else {
 
-        return "redirect:/buildRig";
+            session.setAttribute("currentUser", theUser.getEmail());
+            return "redirect:/buildRig";
+        }
     }
 
 }

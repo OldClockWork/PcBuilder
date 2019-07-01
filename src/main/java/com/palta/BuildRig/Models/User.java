@@ -1,10 +1,11 @@
 package com.palta.BuildRig.Models;
 
+import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -17,13 +18,15 @@ public class User {
     private int id;
 
     @NotNull
-    @Size(min = 4,  message = "Invalid username")
+    @Size(min = 4, max = 15, message = "Username should only be between 4 - 15 characters long")
     private String username;
 
     @NotNull
+    @Email(message = "Invalid email")
     private String email;
 
     @NotNull
+    @Size(min = 4,  message = "Password should have more than 4 characters")
     private String password;
 
 

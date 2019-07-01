@@ -56,6 +56,8 @@ public class Rig {
         this.processingSpeed = processingSpeed;
     }
 
+
+
     public String getName() {
         return name;
     }

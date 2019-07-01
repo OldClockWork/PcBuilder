@@ -10,13 +10,18 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.management.monitor.Monitor;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "buildRig")
 public class BuildController {
 
+    @Autowired
+    UserDao userDao;
     @Autowired
     RigDao rigDao;
     @Autowired
@@ -48,10 +53,15 @@ public class BuildController {
 
 
     @RequestMapping(value = "",  method = RequestMethod.GET)
-    public String rigList(Model model) {
+    public String rigList(Model model, HttpSession session) {
+
+        String username = (String) session.getAttribute("currentUser");
+        User user = userDao.findByEmail(username);
+
+        List<Rig> userRigs = rigDao.findByUser(user);
 
         model.addAttribute("title", "Rigs");
-        model.addAttribute("rigs", rigDao.findAll());
+        model.addAttribute("rigs", userRigs);
         return "rig/list";
     }
 
@@ -70,6 +80,9 @@ public class BuildController {
     public String add(Model model, @ModelAttribute @Valid Rig rig, HttpSession session) {
 
 
+        String username = (String) session.getAttribute("currentUser");
+        User user = userDao.findByEmail(username);
+        rig.setUser(user);
         rigDao.save(rig);
         return "redirect:/buildRig/rig/" + rig.getId();
     }

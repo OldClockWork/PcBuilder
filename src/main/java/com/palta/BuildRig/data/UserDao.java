@@ -11,5 +11,5 @@ import org.springframework.transaction.annotation.Transactional;
 public interface UserDao extends CrudRepository<User, Integer> {
 
     User findByEmail(String email);
-
+    User findByUsername(String username);
 }

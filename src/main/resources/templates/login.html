@@ -13,12 +13,12 @@
     <form th:object="${userLogin}" method="post">
         <div class="row">
             <label>Email</label>
-            <input type="text" required="required"/>
+            <input th:field="*{email}" required="required"/>
         </div>
 
         <div class="row">
             <label>Password</label>
-            <input type="password" required="required"/>
+            <input type="password" th:field="*{password}" required="required"/>
         </div>
 
         <input type="submit" value="login" />
