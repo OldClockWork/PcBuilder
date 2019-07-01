@@ -12,14 +12,14 @@ public class MotherBoard {
     private int id;
 
     private String name;
-    private int itemPrice;
+    private double itemPrice;
     private String effectWhat;
     private double pcValue;
 
 
     public MotherBoard() {}
 
-    public MotherBoard(String name, int itemPrice, String effectWhat, double pcValue) {
+    public MotherBoard(String name, double itemPrice, String effectWhat, double pcValue) {
         this();
         this.name = name;
         this.itemPrice = itemPrice;
@@ -35,11 +35,11 @@ public class MotherBoard {
         this.name = name;
     }
 
-    public int getItemPrice() {
+    public double getItemPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(int itemPrice) {
+    public void setItemPrice(double itemPrice) {
         this.itemPrice = itemPrice;
     }
 

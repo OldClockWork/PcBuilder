@@ -1,12 +1,11 @@
 package com.palta.BuildRig.Models;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-
 @Entity
-public class Cpu {
-
+public class OpticalDrive {
 
     @Id
     @GeneratedValue
@@ -18,9 +17,9 @@ public class Cpu {
     private double pcValue;
 
 
-    public Cpu() {}
+    public OpticalDrive() {}
 
-    public Cpu(String name, double itemPrice, String effectWhat, double pcValue) {
+    public OpticalDrive(String name, double itemPrice, String effectWhat, double pcValue) {
         this();
         this.name = name;
         this.itemPrice = itemPrice;
@@ -35,7 +34,6 @@ public class Cpu {
     public void setName(String name) {
         this.name = name;
     }
-
 
     public double getItemPrice() {
         return itemPrice;
@@ -65,5 +63,3 @@ public class Cpu {
         return id;
     }
 }
-
-

@@ -12,14 +12,14 @@ public class Memory {
     private int id;
 
     private String name;
-    private int itemPrice;
+    private double itemPrice;
     private String effectWhat;
     private double pcValue;
 
 
     public Memory() {}
 
-    public Memory(String name, int itemPrice, String effectWhat, double pcValue) {
+    public Memory(String name, double itemPrice, String effectWhat, double pcValue) {
         this();
         this.name = name;
         this.itemPrice = itemPrice;
@@ -35,11 +35,11 @@ public class Memory {
         this.name = name;
     }
 
-    public int getItemPrice() {
+    public double getItemPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(int itemPrice) {
+    public void setItemPrice(double itemPrice) {
         this.itemPrice = itemPrice;
     }
 

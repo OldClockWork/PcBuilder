@@ -43,25 +43,79 @@
             <tr th:each="items : ${rigItems.cpu}">
                 <th scope="row">CPU</th>
                 <td th:text="${items.name}"></td>
-                <td th:text="${items.itemPrice} + '$'"></td>
+                <td th:text="'$' + ${items.itemPrice}"></td>
             </tr>
 
             <tr th:each="items : ${rigItems.cpuCooler}">
                 <th scope="row">CPU Cooler</th>
                 <td th:text="${items.name}"></td>
-                <td th:text="${items.itemPrice} + '$'"></td>
+                <td th:text="'$' + ${items.itemPrice}"></td>
             </tr>
 
             <tr th:each="items : ${rigItems.memory}">
                 <th scope="row">Memory</th>
                 <td th:text="${items.name}"></td>
-                <td th:text="${items.itemPrice} + '$'"></td>
+                <td th:text="'$' + ${items.itemPrice}"></td>
             </tr>
 
             <tr th:each="items : ${rigItems.motherBoard}">
                 <th scope="row">Motherboard</th>
                 <td th:text="${items.name}"></td>
-                <td th:text="${items.itemPrice} + '$'"></td>
+                <td th:text="'$' + ${items.itemPrice}"></td>
+            </tr>
+
+            <tr th:each="items : ${rigItems.externalStorage}">
+                <th scope="row">External Storage</th>
+                <td th:text="${items.name}"></td>
+                <td th:text="'$' + ${items.itemPrice}"></td>
+            </tr>
+
+            <tr th:each="items : ${rigItems.operatingSystem}">
+                <th scope="row">Operating System</th>
+                <td th:text="${items.name}"></td>
+                <td th:text="'$' + ${items.itemPrice}"></td>
+            </tr>
+
+            <tr th:each="items : ${rigItems.opticalDrive}">
+                <th scope="row">Optical Drive</th>
+                <td th:text="${items.name}"></td>
+                <td th:text="'$' + ${items.itemPrice}"></td>
+            </tr>
+
+            <tr th:each="items : ${rigItems.pcCase}">
+                <th scope="row">Case</th>
+                <td th:text="${items.name}"></td>
+                <td th:text="'$' + ${items.itemPrice}"></td>
+            </tr>
+
+            <tr th:each="items : ${rigItems.pcMonitor}">
+                <th scope="row">Monitor</th>
+                <td th:text="${items.name}"></td>
+                <td th:text="'$' + ${items.itemPrice}"></td>
+            </tr>
+
+            <tr th:each="items : ${rigItems.powerSupply}">
+                <th scope="row">Power Supply</th>
+                <td th:text="${items.name}"></td>
+                <td th:text="'$' + ${items.itemPrice}"></td>
+            </tr>
+
+            <tr th:each="items : ${rigItems.software}">
+                <th scope="row">Software</th>
+                <td th:text="${items.name}"></td>
+                <td th:text="'$' + ${items.itemPrice}"></td>
+            </tr>
+
+            <tr th:each="items : ${rigItems.storage}">
+                <th scope="row">Storage</th>
+                <td th:text="${items.name}"></td>
+                <td th:text="'$' + ${items.itemPrice}"></td>
+            </tr>
+
+            <tr th:each="items : ${rigItems.videoCard}">
+                <th scope="row">Video Card</th>
+                <td th:text="${items.name}"></td>
+                <td th:text="'$' + ${items.itemPrice}"></td>
             </tr>
             </tbody>
         </table>
@@ -71,8 +125,17 @@
 
         <table>
             <tr>
-            <th scope="row">Total Price:</th>
-            <td th:text="${totalPrice} + '$'"></td>
+                <th scope="row">Total Price:</th>
+                <td th:text="'$' + ${totalPrice}"></td>
+            </tr>
+            <tr>
+                <th scope="row">GHz:</th>
+                <td th:text="${ProcessingSpeed}"></td>
+            </tr>
+
+            <tr>
+                <th scope="row">Memory:</th>
+                <td th:text="${Memory} + ' GB'"></td>
             </tr>
         </table>
 

@@ -13,13 +13,13 @@ public class CpuCooler {
     private int id;
 
     private String name;
-    private int itemPrice;
+    private double itemPrice;
     private String effectWhat;
     private double pcValue;
 
     public CpuCooler(){}
 
-    public CpuCooler(String name, int itemPrice, String effectWhat, double pcValue) {
+    public CpuCooler(String name, double itemPrice, String effectWhat, double pcValue) {
         this();
         this.name = name;
         this.itemPrice = itemPrice;
@@ -35,11 +35,11 @@ public class CpuCooler {
         this.name = name;
     }
 
-    public int getItemPrice() {
+    public double getItemPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(int itemPrice) {
+    public void setItemPrice(double itemPrice) {
         this.itemPrice = itemPrice;
     }
 

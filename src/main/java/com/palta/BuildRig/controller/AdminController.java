@@ -1,14 +1,8 @@
 package com.palta.BuildRig.controller;
 
 
-import com.palta.BuildRig.Models.Cpu;
-import com.palta.BuildRig.Models.CpuCooler;
-import com.palta.BuildRig.Models.Memory;
-import com.palta.BuildRig.Models.MotherBoard;
-import com.palta.BuildRig.data.CpuCoolerDao;
-import com.palta.BuildRig.data.CpuDao;
-import com.palta.BuildRig.data.MemoryDao;
-import com.palta.BuildRig.data.MotherBoardDao;
+import com.palta.BuildRig.Models.*;
+import com.palta.BuildRig.data.*;
 import com.palta.BuildRig.forms.hardwareType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +26,24 @@ public class AdminController {
     MemoryDao memoryDao;
     @Autowired
     MotherBoardDao motherBoardDao;
+    @Autowired
+    ExternalStorageDao externalStorageDao;
+    @Autowired
+    OperatingSystemDao operatingSystemDao;
+    @Autowired
+    OpticalDriveDao opticalDriveDao;
+    @Autowired
+    PcCaseDao pcCaseDao;
+    @Autowired
+    PcMonitorDao pcMonitorDao;
+    @Autowired
+    PowerSupplyDao powerSupplyDao;
+    @Autowired
+    SoftwareDao softwareDao;
+    @Autowired
+    StorageDao storageDao;
+    @Autowired
+    VideoCardDao videoCardDao;
 
     @RequestMapping(value = "new-item", method = RequestMethod.GET)
     public String newItem(Model model){
@@ -60,6 +72,34 @@ public class AdminController {
             case MOTHERBOARD:
                 model.addAttribute("Component",new MotherBoard());
                 break;
+            case OPERATING_SYSTEM:
+                model.addAttribute("Component",new OperatingSystem());
+                break;
+            case OPTICAL_DRIVE:
+                model.addAttribute("Component",new OpticalDrive());
+                break;
+            case CASE:
+                model.addAttribute("Component",new PcCase());
+                break;
+            case MONITOR:
+                model.addAttribute("Component",new PcMonitor());
+                break;
+            case POWER_SUPPLY:
+                model.addAttribute("Component",new PowerSupply());
+                break;
+            case SOFTWARE:
+                model.addAttribute("Component",new Software());
+                break;
+            case STORAGE:
+                model.addAttribute("Component",new Storage());
+                break;
+            case VIDEO_CARD:
+                model.addAttribute("Component",new VideoCard());
+                break;
+            case EXTERNAL_STORAGE:
+                model.addAttribute("Component",new ExternalStorage());
+                break;
+
         }
 
         return "admin/add-hardware";
@@ -72,7 +112,16 @@ public class AdminController {
                                   Cpu cpu,
                                   CpuCooler cpuCooler,
                                   Memory memory,
-                                  MotherBoard motherBoard){
+                                  MotherBoard motherBoard,
+                                 ExternalStorage externalStorage,
+                                 OperatingSystem operatingSystem,
+                                 OpticalDrive opticalDrive,
+                                 PcCase pcCase,
+                                 PcMonitor pcMonitor,
+                                 PowerSupply powerSupply,
+                                 Software software,
+                                 Storage storage,
+                                 VideoCard videoCard){
 
         switch (hardwareEnums){
             case CPU:
@@ -84,9 +133,35 @@ public class AdminController {
             case MEMORY:
                 memoryDao.save(memory);
                 break;
-
             case MOTHERBOARD:
                 motherBoardDao.save(motherBoard);
+                break;
+            case EXTERNAL_STORAGE:
+                externalStorageDao.save(externalStorage);
+                break;
+            case OPERATING_SYSTEM:
+                operatingSystemDao.save(operatingSystem);
+                break;
+            case OPTICAL_DRIVE:
+                opticalDriveDao.save(opticalDrive);
+                break;
+            case CASE:
+                pcCaseDao.save(pcCase);
+                break;
+            case MONITOR:
+                pcMonitorDao.save(pcMonitor);
+                break;
+            case POWER_SUPPLY:
+                powerSupplyDao.save(powerSupply);
+                break;
+            case SOFTWARE:
+                softwareDao.save(software);
+                break;
+            case STORAGE:
+                storageDao.save(storage);
+                break;
+            case VIDEO_CARD:
+                videoCardDao.save(videoCard);
                 break;
         }
         return "redirect:/admin/new-item";
