@@ -62,18 +62,19 @@ public class AuthenticationController {
     public String login(Model model, User user){
 
 
+        model.addAttribute(new User());
         model.addAttribute("title","Login");
-        model.addAttribute("userLogin", new User());
         return "login";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String loginProcess(HttpSession session, User user){
+    public String loginProcess(Model model, HttpSession session, User user){
 
 
         User theUser = userDao.findByEmail(user.getEmail());
 
         if (theUser.equals(null)){
+            model.addAttribute("title","Login");
             return "login";
         } else {
 

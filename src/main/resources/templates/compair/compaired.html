@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container">
+
+
+    <table>
+        <tr>
+            <th scope="row" th:text="${priceWarning}"></th>
+            <td th:unless="${price} == 0" th:text="'$' + ${price}"></td>
+        </tr>
+
+        <tr>
+            <th scope="row" th:text="${processWarning}"></th>
+            <td th:unless="${processingSpeed} == 0" th:text="${processingSpeed} + ' GHz'"></td>
+        </tr>
+
+        <tr>
+            <th scope="row" th:text="${storageWarning}"></th>
+            <td th:unless="${storage} == 0" th:text="${storage} + ' GB'"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

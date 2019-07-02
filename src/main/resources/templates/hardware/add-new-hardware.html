@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head">
     <meta charset="UTF-8"/>
-    <title></title>
+
 </head>
 <body>
 
@@ -10,13 +10,18 @@
 
 <div class="container">
 
+
     <h1 th:text="${title}"></h1>
 
-    <ul th:each="rig : ${rigs}">
-        <li><a th:href="@{'/lists/wishlistRigItems/' + ${rig.id}}" th:text="${rig.name}"></a></li>
-    </ul>
-</div>
+    <div th:each="hardware : ${hardwareType}">
+        <tr>
+            <td><a th:href="@{/hardware/add-item(hardwareEnums=${hardware})}"
+                   th:text=" 'Add New ' + ${hardware.name}"></a></td>
+            <td></td>
+        </tr>
+    </div>
 
+</div>
 
 </body>
 </html>

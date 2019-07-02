@@ -1,5 +1,4 @@
 package com.palta.BuildRig.controller;
-
 import com.palta.BuildRig.Models.*;
 import com.palta.BuildRig.data.*;
 import com.palta.BuildRig.forms.hardwareType;
@@ -7,13 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-
-import javax.management.monitor.Monitor;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -57,14 +51,12 @@ public class BuildController {
 
         String username = (String) session.getAttribute("currentUser");
         User user = userDao.findByEmail(username);
-
         List<Rig> userRigs = rigDao.findByUser(user);
 
         model.addAttribute("title", "Rigs");
         model.addAttribute("rigs", userRigs);
         return "rig/list";
     }
-
 
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
@@ -95,7 +87,7 @@ public class BuildController {
         Rig foundRig = rigDao.findOne(rigId);
 
         model.addAttribute("totalPrice",foundRig.getPrice());
-        model.addAttribute("Memory",foundRig.getPcMemory());
+        model.addAttribute("Storage",foundRig.getPcStorage());
         model.addAttribute("ProcessingSpeed",foundRig.getProcessingSpeed());
 
         model.addAttribute("rigItems",foundRig);
@@ -128,7 +120,7 @@ public class BuildController {
             case MEMORY:
                 Iterable<Memory> allMemory = memoryDao.findAll();
                 model.addAttribute("findHardware", allMemory);
-                model.addAttribute("symbol","TB");
+
                 break;
 
             case MOTHERBOARD:
@@ -139,6 +131,7 @@ public class BuildController {
             case EXTERNAL_STORAGE:
                 Iterable<ExternalStorage> allExternalStorage = externalStorageDao.findAll();
                 model.addAttribute("findHardware", allExternalStorage);
+                model.addAttribute("symbol","GB");
                 break;
 
             case OPERATING_SYSTEM:
@@ -174,6 +167,7 @@ public class BuildController {
             case STORAGE:
                 Iterable<Storage> allStorage = storageDao.findAll();
                 model.addAttribute("findHardware", allStorage);
+                model.addAttribute("symbol","GB");
                 break;
 
             case VIDEO_CARD:
@@ -261,7 +255,7 @@ public class BuildController {
         }
 
         double Price = 0;
-        double Memory = 0;
+        double Storage = 0;
         double ProcessingSpeed = 0;
 //----------------------------------------------------------ADD PRICES
         if (rig.getCpu() != null){
@@ -273,13 +267,13 @@ public class BuildController {
         }
         if (rig.getMemory() != null){
             Price += rig.getMemory().getItemPrice();
-            Memory += rig.getMemory().getPcValue();
         }
         if (rig.getMotherBoard() != null){
             Price += rig.getMotherBoard().getItemPrice();
         }
         if (rig.getExternalStorage() != null){
             Price += rig.getExternalStorage().getItemPrice();
+            Storage += rig.getExternalStorage().getPcValue();
         }
         if (rig.getOperatingSystem() != null){
             Price += rig.getOperatingSystem().getItemPrice();
@@ -301,6 +295,7 @@ public class BuildController {
         }
         if (rig.getStorage() != null){
             Price += rig.getStorage().getItemPrice();
+            Storage += rig.getStorage().getPcValue();
         }
         if (rig.getVideoCard() != null){
             Price += rig.getVideoCard().getItemPrice();
@@ -308,7 +303,7 @@ public class BuildController {
 //----------------------------------------------------------ADD PRICES
 
         rig.setPrice(Price);
-        rig.setPcMemory(Memory);
+        rig.setPcStorage(Storage);
         rig.setProcessingSpeed(ProcessingSpeed);
         rigDao.save(rig);
         return "redirect:/buildRig/rig/" + rig.getId();

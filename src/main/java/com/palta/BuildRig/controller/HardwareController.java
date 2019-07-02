@@ -15,7 +15,7 @@ import javax.validation.Valid;
 
 
 @Controller
-@RequestMapping(value = "admin")
+@RequestMapping(value = "hardware")
 public class HardwareController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class HardwareController {
 
         model.addAttribute("hardwareType", hardwareEnums);
         model.addAttribute("title","New Hardware");
-        return "admin/add-new-hardware";
+        return "hardware/add-new-hardware";
     }
 
 
@@ -62,47 +62,60 @@ public class HardwareController {
         switch (hardwareEnums){
             case CPU:
                 model.addAttribute("Component",new Cpu());
+                model.addAttribute("value","GHz");
                 break;
             case CPU_COOLER:
                 model.addAttribute("Component",new CpuCooler());
+                model.addAttribute("value","none");
                 break;
             case MEMORY:
                 model.addAttribute("Component",new Memory());
+                model.addAttribute("value","none");
                 break;
             case MOTHERBOARD:
                 model.addAttribute("Component",new MotherBoard());
+                model.addAttribute("value","none");
                 break;
             case OPERATING_SYSTEM:
                 model.addAttribute("Component",new OperatingSystem());
+                model.addAttribute("value","none");
                 break;
             case OPTICAL_DRIVE:
                 model.addAttribute("Component",new OpticalDrive());
+                model.addAttribute("value","none");
                 break;
             case CASE:
                 model.addAttribute("Component",new PcCase());
+                model.addAttribute("value","none");
                 break;
             case MONITOR:
                 model.addAttribute("Component",new PcMonitor());
+                model.addAttribute("value","none");
                 break;
             case POWER_SUPPLY:
                 model.addAttribute("Component",new PowerSupply());
+                model.addAttribute("value","none");
                 break;
             case SOFTWARE:
                 model.addAttribute("Component",new Software());
+                model.addAttribute("value","none");
                 break;
             case STORAGE:
                 model.addAttribute("Component",new Storage());
+                model.addAttribute("value","GB");
                 break;
             case VIDEO_CARD:
                 model.addAttribute("Component",new VideoCard());
+                model.addAttribute("value","none");
                 break;
             case EXTERNAL_STORAGE:
                 model.addAttribute("Component",new ExternalStorage());
+                model.addAttribute("value","GB");
                 break;
 
         }
 
-        return "admin/add-hardware";
+        return "hardware/add-hardware";
     }
 
 
@@ -164,7 +177,7 @@ public class HardwareController {
                 videoCardDao.save(videoCard);
                 break;
         }
-        return "redirect:/admin/new-item";
+        return "redirect:/hardware/new-item";
     }
 }
 

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container">
+
+    <form method="post">
+
+        <label>Current</label>
+        <select name="mainRig">
+            <option th:each="rigM : ${mainRig}" th:text="${rigM.name}"  th:value="${rigM.id}"></option>
+        </select>
+
+
+        <label>Other</label>
+        <select  name="otherRig">
+            <option th:each="rigO : ${otherRig}" th:text="${rigO.name}" th:value="${rigO.id}"></option>
+        </select>
+
+        <input type="submit" value="Compair" />
+    </form>
+
+</div>
+
+
+</body>
+</html>

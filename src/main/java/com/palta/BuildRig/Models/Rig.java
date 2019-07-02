@@ -44,19 +44,19 @@ public class Rig {
 
     private double price;
     private double processingSpeed;
-    private double pcMemory;
+    private double pcStorage;
 
 
 
 
     public Rig(){}
 
-    public Rig(int price, int processingSpeed) {
+    public Rig(double price, double processingSpeed, double pcStorage) {
+        this();
         this.price = price;
         this.processingSpeed = processingSpeed;
+        this.pcStorage = pcStorage;
     }
-
-
 
     public String getName() {
         return name;
@@ -92,12 +92,12 @@ public class Rig {
         this.price = price;
     }
 
-    public double getPcMemory() {
-        return pcMemory;
+    public double getPcStorage() {
+        return pcStorage;
     }
 
-    public void setPcMemory(double pcMemory) {
-        this.pcMemory = pcMemory;
+    public void setPcStorage(double pcStorage) {
+        this.pcStorage = pcStorage;
     }
 
     public double getProcessingSpeed() {
@@ -203,4 +203,5 @@ public class Rig {
     public void setExternalStorage(ExternalStorage externalStorage) {
         this.externalStorage = externalStorage;
     }
+
 }
