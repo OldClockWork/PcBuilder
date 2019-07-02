@@ -10,15 +10,16 @@
 
     <h1 th:text="${title}"></h1>
 
-    <form th:object="${userLogin}" method="post">
-        <div class="row">
+    <form th:object="${userLogin}" method="post" style="width:600px;">
+
+        <div class="form-group">
             <label>Email</label>
-            <input th:field="*{email}" required="required"/>
+            <input th:field="*{email}" required="required" class="form-control" />
         </div>
 
-        <div class="row">
+        <div class="form-group">
             <label>Password</label>
-            <input type="password" th:field="*{password}" required="required"/>
+            <input type="password" th:field="*{password}" required="required" class="form-control" />
         </div>
 
         <input type="submit" value="login" />

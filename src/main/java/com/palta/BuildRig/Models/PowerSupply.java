@@ -13,17 +13,15 @@ public class PowerSupply {
 
     private String name;
     private double itemPrice;
-    private String effectWhat;
     private double pcValue;
 
 
     public PowerSupply() {}
 
-    public PowerSupply(String name, double itemPrice, String effectWhat, double pcValue) {
+    public PowerSupply(String name, double itemPrice, double pcValue) {
         this();
         this.name = name;
         this.itemPrice = itemPrice;
-        this.effectWhat = effectWhat;
         this.pcValue = pcValue;
     }
 
@@ -41,14 +39,6 @@ public class PowerSupply {
 
     public void setItemPrice(double itemPrice) {
         this.itemPrice = itemPrice;
-    }
-
-    public String getEffectWhat() {
-        return effectWhat;
-    }
-
-    public void setEffectWhat(String effectWhat) {
-        this.effectWhat = effectWhat;
     }
 
     public double getPcValue() {

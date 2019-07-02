@@ -16,7 +16,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value = "admin")
-public class AdminController {
+public class HardwareController {
 
     @Autowired
     CpuDao cpuDao;

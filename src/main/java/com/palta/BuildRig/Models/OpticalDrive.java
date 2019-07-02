@@ -13,7 +13,6 @@ public class OpticalDrive {
 
     private String name;
     private double itemPrice;
-    private String effectWhat;
     private double pcValue;
 
 
@@ -23,7 +22,6 @@ public class OpticalDrive {
         this();
         this.name = name;
         this.itemPrice = itemPrice;
-        this.effectWhat = effectWhat;
         this.pcValue = pcValue;
     }
 
@@ -41,14 +39,6 @@ public class OpticalDrive {
 
     public void setItemPrice(double itemPrice) {
         this.itemPrice = itemPrice;
-    }
-
-    public String getEffectWhat() {
-        return effectWhat;
-    }
-
-    public void setEffectWhat(String effectWhat) {
-        this.effectWhat = effectWhat;
     }
 
     public double getPcValue() {
