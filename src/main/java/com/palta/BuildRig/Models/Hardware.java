@@ -16,15 +16,17 @@ public class Hardware {
     private String name;
     private double itemPrice;
     private double pcValue;
+    private String img;
 
 
     public Hardware() {}
 
-    public Hardware(String name, double itemPrice, double pcValue) {
+    public Hardware(String name, double itemPrice, double pcValue, String img) {
         this();
         this.name = name;
         this.itemPrice = itemPrice;
         this.pcValue = pcValue;
+        this.img = img;
     }
 
     public int getId() {
@@ -53,5 +55,13 @@ public class Hardware {
 
     public void setPcValue(double pcValue) {
         this.pcValue = pcValue;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

@@ -55,7 +55,7 @@ public class CompairController {
         else if (Price > 0){
             model.addAttribute("priceWarning","Your current rig will cost you an extra:");
         } else {
-            model.addAttribute("priceWarning","No value difference");
+            model.addAttribute("priceWarning","No value difference in price");
         }
 
 
@@ -66,7 +66,7 @@ public class CompairController {
         else if(ProcessingSpeed > 0){
             model.addAttribute("processWarning", "Your current rig runs faster by:");
         } else {
-            model.addAttribute("processWarning", "No value difference");
+            model.addAttribute("processWarning", "No value difference in processing speed");
         }
 
         if (Storage < 0){
@@ -76,7 +76,7 @@ public class CompairController {
         else if (Storage > 0){
             model.addAttribute("storageWarning", "You current rig has more storage by:");
         } else {
-            model.addAttribute("storageWarning", "No value difference");
+            model.addAttribute("storageWarning", "No value difference storage");
         }
 
         model.addAttribute("price", Price);

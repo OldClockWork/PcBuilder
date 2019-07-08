@@ -17,7 +17,7 @@
 
     <form th:object="${Component}" method="post" >
         <label>Name</label>
-        <input th:field="*{name}"/>
+        <input th:field="*{name}" required="required"/>
         <br/>
 
         <label>Price</label>
@@ -26,6 +26,10 @@
 
         <label th:text="${value}"></label>
         <input th:field="*{pcValue}" />
+        <br/>
+
+        <label>Image</label>
+        <input th:field="*{img}" type="file" />
         <br/>
 
         <input type="submit" value="Add" />

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Controller
@@ -86,9 +87,11 @@ public class BuildController {
         hardwareType[] hardwareEnums = hardwareType.values();
         Rig foundRig = rigDao.findOne(rigId);
 
-        model.addAttribute("totalPrice",foundRig.getPrice());
-        model.addAttribute("Storage",foundRig.getPcStorage());
-        model.addAttribute("ProcessingSpeed",foundRig.getProcessingSpeed());
+        DecimalFormat goodFormat = new DecimalFormat("0.00");
+
+        model.addAttribute("totalPrice", goodFormat.format(foundRig.getPrice()));
+        model.addAttribute("Storage",goodFormat.format(foundRig.getPcStorage()));
+        model.addAttribute("ProcessingSpeed", goodFormat.format(foundRig.getProcessingSpeed()));
 
         model.addAttribute("rigItems",foundRig);
         model.addAttribute("title", "Build-a-rig");
