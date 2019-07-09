@@ -5,7 +5,7 @@
 
 </head>
 <body>
-
+<!--<img src="/images/corei3.jpg"/>-->
 <div th:replace="fragments :: page-header"></div>
 
 <div class="container">
@@ -13,13 +13,14 @@
     <h1 th:text="${title} + 's'">default</h1>
 
     <table class="table">
-
         <thead>
         <tr>
-            <th scope="col">Name</th>
+            <th scope="col">Image</th>
+            <th scope="col" >Name</th>
             <th scope="col">Price</th>
             <th scope="col" th:text="${symbol}"></th>
             <th scope="col"></th>
+
         </tr>
         </thead>
 
@@ -29,6 +30,7 @@
         <div th:each="hardwareItem : ${findHardware}">
             <tr>
                 <form>
+                    <td><img th:src="@{/images/} + ${hardwareItem.img}"  style="width: 100px; height: 100px;"/></td>
                     <td th:text="${hardwareItem.name}"></td>
                     <td th:text="'$' + ${#numbers.formatDecimal(hardwareItem.itemPrice, 0, 'COMMA', 2, 'POINT')}"></td>
                     <td th:unless="${hardwareItem.pcValue} == 0" th:text="${hardwareItem.pcValue}"></td>
