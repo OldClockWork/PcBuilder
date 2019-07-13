@@ -18,7 +18,7 @@ public class BuildController {
     @Autowired
     UserDao userDao;
     @Autowired
-    RigDao rigDao;
+    PcDao pcDao;
     @Autowired
     CpuDao cpuDao;
     @Autowired
@@ -52,40 +52,40 @@ public class BuildController {
 
         String username = (String) session.getAttribute("currentUser");
         User user = userDao.findByEmail(username);
-        List<Rig> userRigs = rigDao.findByUser(user);
+        List<Pc> userRigs = pcDao.findByUser(user);
 
         model.addAttribute("title", "PC Designs");
-        model.addAttribute("rigs", userRigs);
-        return "rig/list";
+        model.addAttribute("pcs", userRigs);
+        return "pc/list";
     }
 
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String addRig(Model model){
         model.addAttribute("title", "New PC");
-        model.addAttribute(new Rig());
+        model.addAttribute(new Pc());
 
-        return "rig/name-rig";
+        return "pc/name-pc";
     }
 
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String add(Model model, @ModelAttribute @Valid Rig rig, HttpSession session) {
+    public String add(Model model, @ModelAttribute @Valid Pc pc, HttpSession session) {
 
 
         String username = (String) session.getAttribute("currentUser");
         User user = userDao.findByEmail(username);
-        rig.setUser(user);
-        rigDao.save(rig);
-        return "redirect:/buildRig/rig/" + rig.getId();
+        pc.setUser(user);
+        pcDao.save(pc);
+        return "redirect:/buildRig/pc/" + pc.getId();
     }
 
 
-    @RequestMapping(value = "/rig/{rigId}",  method = RequestMethod.GET)
-    public String creationPage(Model model, @PathVariable int rigId) {
+    @RequestMapping(value = "/pc/{pcId}",  method = RequestMethod.GET)
+    public String creationPage(Model model, @PathVariable int pcId) {
 
         hardwareType[] hardwareEnums = hardwareType.values();
-        Rig foundRig = rigDao.findOne(rigId);
+        Pc foundRig = pcDao.findOne(pcId);
 
         DecimalFormat goodFormat = new DecimalFormat("0.00");
 
@@ -96,14 +96,14 @@ public class BuildController {
         model.addAttribute("rigItems",foundRig);
         model.addAttribute("title", "Build PC");
         model.addAttribute("hardwareType", hardwareEnums);
-        model.addAttribute("rigId", rigId);
-        return "/rig/rigBuilder";
+        model.addAttribute("pcId", pcId);
+        return "/pc/rigBuilder";
     }
 
     @RequestMapping(value = "add-hardware", method = RequestMethod.GET)
-    public String hardwarePick(Model model, @RequestParam hardwareType hardwareEnums, @RequestParam int rigId) {
+    public String hardwarePick(Model model, @RequestParam hardwareType hardwareEnums, @RequestParam int pcId) {
 
-        Rig rig = rigDao.findOne(rigId);
+        Pc rig = pcDao.findOne(pcId);
         model.addAttribute("title", hardwareEnums.getName());
         model.addAttribute("Hardware", hardwareEnums);
         model.addAttribute("foundRig",rig);
@@ -179,81 +179,81 @@ public class BuildController {
                 break;
         }
 
-        return "/rig/add-hardware";
+        return "/pc/add-hardware";
     }
 
     @RequestMapping(value = "add-hardware-process", method = RequestMethod.GET)
     public String addingProcess(Model model,
                                 @RequestParam int hardwareId,
-                                @RequestParam int rigId,
+                                @RequestParam int pcId,
                                 @RequestParam hardwareType hardwareEnums){
 
-        Rig rig = rigDao.findOne(rigId);
+        Pc pc = pcDao.findOne(pcId);
 
         switch (hardwareEnums){
             case CPU:
             Cpu cpu = cpuDao.findOne(hardwareId);
-            rig.setCpu(cpu);
+            pc.setCpu(cpu);
             break;
 
             case CPU_COOLER:
             CpuCooler cpuCooler = cpuCoolerDao.findOne(hardwareId);
-            rig.setCpuCooler(cpuCooler);
+                pc.setCpuCooler(cpuCooler);
             break;
 
             case MEMORY:
             Memory memory = memoryDao.findOne(hardwareId);
-            rig.setMemory(memory);
+                pc.setMemory(memory);
             break;
 
             case MOTHERBOARD:
             MotherBoard motherBoard = motherBoardDao.findOne(hardwareId);
-            rig.setMotherBoard(motherBoard);
+                pc.setMotherBoard(motherBoard);
             break;
 
             case EXTERNAL_STORAGE:
                 ExternalStorage externalStorage = externalStorageDao.findOne(hardwareId);
-                rig.setExternalStorage(externalStorage);
+                pc.setExternalStorage(externalStorage);
                 break;
 
             case OPERATING_SYSTEM:
                 OperatingSystem operatingSystem = operatingSystemDao.findOne(hardwareId);
-                rig.setOperatingSystem(operatingSystem);
+                pc.setOperatingSystem(operatingSystem);
                 break;
 
             case OPTICAL_DRIVE:
                 OpticalDrive opticalDrive = opticalDriveDao.findOne(hardwareId);
-                rig.setOpticalDrive(opticalDrive);
+                pc.setOpticalDrive(opticalDrive);
                 break;
 
             case CASE:
                 PcCase pcCase = pcCaseDao.findOne(hardwareId);
-                rig.setPcCase(pcCase);
+                pc.setPcCase(pcCase);
                 break;
 
             case MONITOR:
                 PcMonitor pcMonitor = pcMonitorDao.findOne(hardwareId);
-                rig.setPcMonitor(pcMonitor);
+                pc.setPcMonitor(pcMonitor);
                 break;
 
             case POWER_SUPPLY:
                 PowerSupply powerSupply = powerSupplyDao.findOne(hardwareId);
-                rig.setPowerSupply(powerSupply);
+                pc.setPowerSupply(powerSupply);
                 break;
 
             case SOFTWARE:
                 Software software = softwareDao.findOne(hardwareId);
-                rig.setSoftware(software);
+                pc.setSoftware(software);
                 break;
 
             case STORAGE:
                 Storage storage = storageDao.findOne(hardwareId);
-                rig.setStorage(storage);
+                pc.setStorage(storage);
                 break;
 
             case VIDEO_CARD:
                 VideoCard videoCard = videoCardDao.findOne(hardwareId);
-                rig.setVideoCard(videoCard);
+                pc.setVideoCard(videoCard);
                 break;
         }
 
@@ -261,55 +261,55 @@ public class BuildController {
         double Storage = 0;
         double ProcessingSpeed = 0;
 //----------------------------------------------------------ADD PRICES
-        if (rig.getCpu() != null){
-            Price += rig.getCpu().getItemPrice();
-            ProcessingSpeed += rig.getCpu().getPcValue();
+        if (pc.getCpu() != null){
+            Price += pc.getCpu().getItemPrice();
+            ProcessingSpeed += pc.getCpu().getPcValue();
         }
-        if (rig.getCpuCooler() != null){
-            Price += rig.getCpuCooler().getItemPrice();
+        if (pc.getCpuCooler() != null){
+            Price += pc.getCpuCooler().getItemPrice();
         }
-        if (rig.getMemory() != null){
-            Price += rig.getMemory().getItemPrice();
+        if (pc.getMemory() != null){
+            Price += pc.getMemory().getItemPrice();
         }
-        if (rig.getMotherBoard() != null){
-            Price += rig.getMotherBoard().getItemPrice();
+        if (pc.getMotherBoard() != null){
+            Price += pc.getMotherBoard().getItemPrice();
         }
-        if (rig.getExternalStorage() != null){
-            Price += rig.getExternalStorage().getItemPrice();
-            Storage += rig.getExternalStorage().getPcValue();
+        if (pc.getExternalStorage() != null){
+            Price += pc.getExternalStorage().getItemPrice();
+            Storage += pc.getExternalStorage().getPcValue();
         }
-        if (rig.getOperatingSystem() != null){
-            Price += rig.getOperatingSystem().getItemPrice();
+        if (pc.getOperatingSystem() != null){
+            Price += pc.getOperatingSystem().getItemPrice();
         }
-        if (rig.getOpticalDrive() != null){
-            Price += rig.getOpticalDrive().getItemPrice();
+        if (pc.getOpticalDrive() != null){
+            Price += pc.getOpticalDrive().getItemPrice();
         }
-        if (rig.getPcCase() != null){
-            Price += rig.getPcCase().getItemPrice();
+        if (pc.getPcCase() != null){
+            Price += pc.getPcCase().getItemPrice();
         }
-        if (rig.getPcMonitor() != null){
-            Price += rig.getPcMonitor().getItemPrice();
+        if (pc.getPcMonitor() != null){
+            Price += pc.getPcMonitor().getItemPrice();
         }
-        if (rig.getPowerSupply() != null){
-            Price += rig.getPowerSupply().getItemPrice();
+        if (pc.getPowerSupply() != null){
+            Price += pc.getPowerSupply().getItemPrice();
         }
-        if (rig.getSoftware() != null){
-            Price += rig.getSoftware().getItemPrice();
+        if (pc.getSoftware() != null){
+            Price += pc.getSoftware().getItemPrice();
         }
-        if (rig.getStorage() != null){
-            Price += rig.getStorage().getItemPrice();
-            Storage += rig.getStorage().getPcValue();
+        if (pc.getStorage() != null){
+            Price += pc.getStorage().getItemPrice();
+            Storage += pc.getStorage().getPcValue();
         }
-        if (rig.getVideoCard() != null){
-            Price += rig.getVideoCard().getItemPrice();
+        if (pc.getVideoCard() != null){
+            Price += pc.getVideoCard().getItemPrice();
         }
 //----------------------------------------------------------ADD PRICES
 
-        rig.setPrice(Price);
-        rig.setPcStorage(Storage);
-        rig.setProcessingSpeed(ProcessingSpeed);
-        rigDao.save(rig);
-        return "redirect:/buildRig/rig/" + rig.getId();
+        pc.setPrice(Price);
+        pc.setPcStorage(Storage);
+        pc.setProcessingSpeed(ProcessingSpeed);
+        pcDao.save(pc);
+        return "redirect:/buildRig/pc/" + pc.getId();
     }
 
 }

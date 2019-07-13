@@ -34,7 +34,7 @@
                     <td th:text="${hardwareItem.name}"></td>
                     <td th:text="'$' + ${#numbers.formatDecimal(hardwareItem.itemPrice, 0, 'COMMA', 2, 'POINT')}"></td>
                     <td th:unless="${hardwareItem.pcValue} == 0" th:text="${hardwareItem.pcValue}"></td>
-                    <td><a th:href="@{/buildRig/add-hardware-process(hardwareId=${hardwareItem.id}, rigId=${foundRig.id}, hardwareEnums=${Hardware})}" th:text="Select"></a></td>
+                    <td><a th:href="@{/buildRig/add-hardware-process(hardwareId=${hardwareItem.id}, pcId=${foundRig.id}, hardwareEnums=${Hardware})}" th:text="Select"></a></td>
                 </form>
             </tr>
         </div>

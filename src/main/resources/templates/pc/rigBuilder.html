@@ -19,7 +19,7 @@
             <div th:each="hardware : ${hardwareType}">
                 <tbody>
                 <tr>
-                    <td><a th:href="@{/buildRig/add-hardware(rigId=${rigId} , hardwareEnums=${hardware})}"
+                    <td><a th:href="@{/buildRig/add-hardware(pcId=${pcId} , hardwareEnums=${hardware})}"
                            th:text=" 'Select ' + ${hardware.name}"></a></td>
                     <td></td>
                 </tr>

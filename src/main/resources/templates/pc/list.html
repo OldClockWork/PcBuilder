@@ -11,8 +11,8 @@
 
     <h1 th:text="${title}"></h1>
 
-    <ul th:each="rig : ${rigs}">
-        <li><strong><a th:href="@{'/buildRig/rig/' + ${rig.id}}" th:text="${rig.name}"></a></strong></li>
+    <ul th:each="pc : ${pcs}">
+        <li><strong><a th:href="@{'/buildRig/pc/' + ${pc.id}}" th:text="${pc.name}"></a></strong></li>
     </ul>
 </div>
 

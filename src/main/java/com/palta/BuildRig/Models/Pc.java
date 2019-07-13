@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Rig {
+public class Pc {
 
     @Id
     @GeneratedValue
@@ -49,9 +49,9 @@ public class Rig {
 
 
 
-    public Rig(){}
+    public Pc(){}
 
-    public Rig(double price, double processingSpeed, double pcStorage) {
+    public Pc(double price, double processingSpeed, double pcStorage) {
         this();
         this.price = price;
         this.processingSpeed = processingSpeed;

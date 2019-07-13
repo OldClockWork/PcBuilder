@@ -1,6 +1,6 @@
 package com.palta.BuildRig.data;
 
-import com.palta.BuildRig.Models.Rig;
+import com.palta.BuildRig.Models.Pc;
 import com.palta.BuildRig.Models.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -10,9 +10,9 @@ import java.util.List;
 
 @Transactional
 @Repository
-public interface RigDao extends CrudRepository<Rig, Integer> {
+public interface PcDao extends CrudRepository<Pc, Integer> {
 
-    List<Rig> findByUser(User user);
+    List<Pc> findByUser(User user);
 
 
 }
