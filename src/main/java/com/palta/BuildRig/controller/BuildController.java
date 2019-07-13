@@ -54,7 +54,7 @@ public class BuildController {
         User user = userDao.findByEmail(username);
         List<Rig> userRigs = rigDao.findByUser(user);
 
-        model.addAttribute("title", "Rigs");
+        model.addAttribute("title", "PC Designs");
         model.addAttribute("rigs", userRigs);
         return "rig/list";
     }
@@ -62,7 +62,7 @@ public class BuildController {
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String addRig(Model model){
-        model.addAttribute("title", "Rig Name");
+        model.addAttribute("title", "New PC");
         model.addAttribute(new Rig());
 
         return "rig/name-rig";
@@ -94,7 +94,7 @@ public class BuildController {
         model.addAttribute("ProcessingSpeed", goodFormat.format(foundRig.getProcessingSpeed()));
 
         model.addAttribute("rigItems",foundRig);
-        model.addAttribute("title", "Build-a-rig");
+        model.addAttribute("title", "Build PC");
         model.addAttribute("hardwareType", hardwareEnums);
         model.addAttribute("rigId", rigId);
         return "/rig/rigBuilder";

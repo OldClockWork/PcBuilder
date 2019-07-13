@@ -8,9 +8,9 @@
 
 
 <div class="container">
-    <h1 th:text="${title}"></h1>
+    <h1 th:text="${title}" class="mt-5" style="font-family: Times New Roman, Times, serif; color: #DC143C;"></h1>
 
-    <form th:object="${user}" method="post" style="width:600px;">
+    <form th:object="${user}" method="post" style="width:300px;" class="mt-4">
 
         <div class="form-group">
             <label><strong>Username</strong></label>
@@ -37,7 +37,8 @@
             <span th:text="${emailError}"></span>
         </div>
 
-        <input type="submit" value="Register"/>
+        <input type="submit" value="Register" class="btn btn-danger" style="border-radius: 12px; margin-left: 1%;"/>
+        <label class="mt-2"><a th:href="@{/account/login}" th:text="'Already have an account? Login here!'"></a></label>
     </form>
 </div>
 

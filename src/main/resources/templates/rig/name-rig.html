@@ -9,12 +9,14 @@
 
 <div class="container">
 
-    <form method="post" style="max-width:600px;" th:object="${rig}">
-        <div>
-            <label th:for="name">Name</label>
-            <input th:field="*{name}"/>
+    <h1 th:text="${title}" class="mt-4"></h1>
+
+    <form method="post" style="max-width:300px;" th:object="${rig}" class="mt-5">
+        <div class="form-group">
+            <strong><label th:for="name">Name</label></strong>
+            <input th:field="*{name}" class="form-control" required="required"/>
         </div>
-        <input type="submit" value="Create Menu"/>
+        <input type="submit" value="Create Menu" class="btn btn-danger" style="border-radius: 12px; margin-left: 1%;"/>
     </form>
 </div>
 </body>

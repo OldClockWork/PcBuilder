@@ -15,24 +15,24 @@
 
     <h1 th:text="${title}">default</h1>
 
-    <form th:object="${Component}" method="post" >
-        <label>Name</label>
-        <input th:field="*{name}" required="required"/>
+    <form th:object="${Component}" style="width:300px;" method="post" class="mt-5" >
+        <strong><label>Name</label></strong>
+        <input th:field="*{name}" required="required" class="form-control"/>
         <br/>
 
-        <label>Price</label>
-        <input th:field="*{itemPrice}" />
+        <strong><label>Price</label></strong>
+        <input th:field="*{itemPrice}" class="form-control"/>
         <br/>
 
-        <label th:text="${value}"></label>
-        <input th:field="*{pcValue}" />
+        <strong><label th:text="${value}"></label></strong>
+        <input th:field="*{pcValue}" class="form-control"/>
         <br/>
 
-        <label>Image</label>
-        <input th:field="*{img}" type="file" />
+
+        <input th:field="*{img}" type="file" class="pb-3" />
         <br/>
 
-        <input type="submit" value="Add" />
+        <input type="submit" value="Add" class="btn btn-danger" style="border-radius: 12px; margin-left: 1%;" />
     </form>
 
 </div>

@@ -25,7 +25,7 @@ public class AuthenticationController {
     public String register(Model model){
 
         model.addAttribute(new User());
-        model.addAttribute("title","Register");
+        model.addAttribute("title","REGISTER");
         return "register";
     }
 
@@ -33,7 +33,7 @@ public class AuthenticationController {
     public String registerProcess(Model model, @ModelAttribute @Valid User user, Errors errors, HttpSession session){
 
         if (errors.hasErrors()){
-            model.addAttribute("title","Register");
+            model.addAttribute("title","REGISTER");
             return "register";
         }
 
@@ -63,7 +63,7 @@ public class AuthenticationController {
 
 
         model.addAttribute(new User());
-        model.addAttribute("title","Login");
+        model.addAttribute("title","LOGIN");
         return "login";
     }
 

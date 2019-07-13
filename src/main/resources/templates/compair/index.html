@@ -10,20 +10,20 @@
 
 <div class="container">
 
-    <form method="post">
+    <form method="post" style="width:150px;" class="mt-5">
 
-        <label>Current</label>
-        <select name="mainRig">
+        <strong><label>Current</label></strong>
+        <select name="mainRig" class="form-control">
             <option th:each="rigM : ${mainRig}" th:text="${rigM.name}"  th:value="${rigM.id}"></option>
         </select>
 
 
-        <label>Other</label>
-        <select  name="otherRig">
+        <strong><label class="mt-5">Other</label></strong>
+        <select name="otherRig" class="form-control">
             <option th:each="rigO : ${otherRig}" th:text="${rigO.name}" th:value="${rigO.id}"></option>
         </select>
 
-        <input type="submit" value="Compair" />
+        <input type="submit" value="Compare" class="btn btn-danger" style="border-radius: 12px; margin-top: 30%;" />
     </form>
 
 </div>

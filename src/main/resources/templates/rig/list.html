@@ -12,7 +12,7 @@
     <h1 th:text="${title}"></h1>
 
     <ul th:each="rig : ${rigs}">
-        <li><a th:href="@{'/buildRig/rig/' + ${rig.id}}" th:text="${rig.name}"></a></li>
+        <li><strong><a th:href="@{'/buildRig/rig/' + ${rig.id}}" th:text="${rig.name}"></a></strong></li>
     </ul>
 </div>
 

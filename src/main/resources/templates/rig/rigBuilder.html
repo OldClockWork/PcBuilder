@@ -31,7 +31,7 @@
         <br/>
 
         <table class="table table-sm">
-            <thead class="thead-dark">
+            <thead  style="background-color: #0FA098;">
             <tr>
                 <th scope="col">Component</th>
                 <th scope="col">Name</th>
@@ -126,16 +126,16 @@
         <table>
             <tr>
                 <th scope="row">Total Price:</th>
-                <td th:text="'$' + ${totalPrice}"></td>
+                <td th:text="'$' + ${totalPrice}" class="pl-2"></td>
             </tr>
             <tr>
                 <th scope="row">GHz:</th>
-                <td th:text="${ProcessingSpeed}"></td>
+                <td th:text="${ProcessingSpeed}" class="pl-2"></td>
             </tr>
 
             <tr>
                 <th scope="row">Storage:</th>
-                <td th:text="${Storage} + ' GB'"></td>
+                <td th:text="${Storage} + ' GB'" class="pl-2"></td>
             </tr>
         </table>
     </form>

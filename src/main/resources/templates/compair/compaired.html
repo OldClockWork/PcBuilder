@@ -11,20 +11,20 @@
 <div class="container">
 
 
-    <table>
+    <table class="mt-5">
         <tr>
             <th scope="row" th:text="${priceWarning}"></th>
-            <td th:unless="${price} == 0" th:text="'$' + ${price}"></td>
+            <td th:unless="${price} == 0" th:text="'$' + ${#numbers.formatDecimal(price, 0, 'COMMA', 2, 'POINT')}" class="pl-2"></td>
         </tr>
 
         <tr>
             <th scope="row" th:text="${processWarning}"></th>
-            <td th:unless="${processingSpeed} == 0" th:text="${processingSpeed} + ' GHz'"></td>
+            <td th:unless="${processingSpeed} == 0" th:text="${#numbers.formatDecimal(processingSpeed, 0, 'COMMA', 2, 'POINT')} + ' GHz'" class="pl-2"></td>
         </tr>
 
         <tr>
             <th scope="row" th:text="${storageWarning}"></th>
-            <td th:unless="${storage} == 0" th:text="${storage} + ' GB'"></td>
+            <td th:unless="${storage} == 0" th:text="${#numbers.formatDecimal(storage, 0, 'COMMA', 2, 'POINT')}  + ' GB'" class="pl-2"></td>
         </tr>
     </table>
 </div>
