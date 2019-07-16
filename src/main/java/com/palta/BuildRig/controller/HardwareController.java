@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 
@@ -46,7 +47,13 @@ public class HardwareController {
     VideoCardDao videoCardDao;
 
     @RequestMapping(value = "new-item", method = RequestMethod.GET)
-    public String newItem(Model model){
+    public String newItem(Model model, HttpSession session){
+
+        if (session.getAttribute("currentUser") == null ||
+            !session.getAttribute("currentUser").equals("micih1@hotmail.com")) {
+
+            return "redirect:/buildRig";
+        }
 
         hardwareType[] hardwareEnums = hardwareType.values();
 
@@ -57,7 +64,13 @@ public class HardwareController {
 
 
     @RequestMapping(value = "add-item",  method = RequestMethod.GET)
-    public String addItem(Model model, @RequestParam hardwareType hardwareEnums){
+    public String addItem(Model model, @RequestParam hardwareType hardwareEnums, HttpSession session){
+
+        if (session.getAttribute("currentUser") == null ||
+                !session.getAttribute("currentUser").equals("micih1@hotmail.com")) {
+
+            return "redirect:/buildRig";
+        }
 
         switch (hardwareEnums){
             case CPU:

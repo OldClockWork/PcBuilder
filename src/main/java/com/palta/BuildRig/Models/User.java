@@ -29,13 +29,16 @@ public class User {
     @Size(min = 4,  message = "Password should have more than 4 characters")
     private String password;
 
+    private int admin;
+
 
     public User(){}
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password, int admin) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.admin = admin;
     }
 
     public String getEmail() {
@@ -63,4 +66,12 @@ public class User {
     }
 
     public int getId() { return id; }
+
+    public int getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(int admin) {
+        this.admin = admin;
+    }
 }

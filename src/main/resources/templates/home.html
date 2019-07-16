@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="homeTitle" th:text="'Welcome to PC Builder'"></h1>
+
+    <br/>
+    <div style="text-align:center;">
+        <a class="btn btn-primary btn-lg active" th:href="@{/account/login}" th:text="Login" id="homeButton1"></a>
+        <a class="btn btn-primary btn-lg active" th:href="@{/account/register}" th:text="Register" id="homeButton2"></a>
+    </div>
+
+    <br/>
+    <br/>
+
+    <p th:text="'PC builder is a website that enables its users to design a variety of computer
+    setups that fits their technical needs or wishes.'" class="homeDesc"></p>
+
+    <p th:text="'Users are able to compare parts, processing speed,
+       storage and price.'" class="homeDesc"></p>
+</div>
+
+
+</body>
+</html>

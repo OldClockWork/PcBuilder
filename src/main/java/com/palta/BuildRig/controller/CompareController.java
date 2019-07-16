@@ -27,13 +27,16 @@ public class CompareController {
     @RequestMapping(value = "compare", method = RequestMethod.GET)
     public String compair(Model model, HttpSession session){
 
+        if (session.getAttribute("currentUser") == null) {
+            return "redirect:/account/login";
+        }
 
         String username = (String) session.getAttribute("currentUser");
         User user = userDao.findByEmail(username);
-        List<Pc> userRigs = pcDao.findByUser(user);
+        List<Pc> userPcs = pcDao.findByUser(user);
 
-        model.addAttribute("mainRig", userRigs);
-        model.addAttribute("otherRig", userRigs);
+        model.addAttribute("mainRig", userPcs);
+        model.addAttribute("otherRig", userPcs);
 
         return "compare/index";
     }
@@ -41,12 +44,12 @@ public class CompareController {
     @RequestMapping(value = "compare", method = RequestMethod.POST)
     public String compairingProcess(Model model, @RequestParam int mainRig, @RequestParam int otherRig){
 
-        Pc rig1 = pcDao.findOne(mainRig);
-        Pc rig2 = pcDao.findOne(otherRig);
+        Pc Pc1 = pcDao.findOne(mainRig);
+        Pc Pc2 = pcDao.findOne(otherRig);
 
-        double Price = rig1.getPrice() - rig2.getPrice();
-        double ProcessingSpeed = rig1.getProcessingSpeed() - rig2.getProcessingSpeed();
-        double Storage = rig1.getPcStorage() - rig2.getPcStorage();
+        double Price = Pc1.getPrice() - Pc2.getPrice();
+        double ProcessingSpeed = Pc1.getProcessingSpeed() - Pc2.getProcessingSpeed();
+        double Storage = Pc1.getPcStorage() - Pc2.getPcStorage();
 
         if(Price < 0){
             model.addAttribute("priceWarning","Your current pc will save you:");
@@ -78,6 +81,16 @@ public class CompareController {
         } else {
             model.addAttribute("storageWarning", "No difference in storage space");
         }
+
+        model.addAttribute("mainName", Pc1.getName());
+        model.addAttribute("mainPrice", Pc1.getPrice());
+        model.addAttribute("mainSpeed", Pc1.getProcessingSpeed());
+        model.addAttribute("mainStorage", Pc1.getPcStorage());
+
+        model.addAttribute("otherName", Pc2.getName());
+        model.addAttribute("otherPrice", Pc2.getPrice());
+        model.addAttribute("otherSpeed", Pc2.getProcessingSpeed());
+        model.addAttribute("otherStorage", Pc2.getPcStorage());
 
         model.addAttribute("price", Price);
         model.addAttribute("processingSpeed", ProcessingSpeed);

@@ -1,0 +1,61 @@
+.navigation {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.navigationItems {
+  float: left;
+}
+
+.navigationItems a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navigationItems a:hover {
+  background-color: #111;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+.homeTitle{
+font-family: Times New Roman, Times, serif;
+color: white;
+text-align:center;
+padding-top: 60px;
+background-color: black;
+
+}
+
+.homeDesc{
+
+text-align:center;
+
+}
+
+#homeButton1{
+
+border-radius: 30px;
+font-size: 15px;
+background-color: red;
+border-color: white;
+font-family: Times New Roman, Times, serif;
+
+}
+
+#homeButton2{
+border-radius: 30px;
+font-size: 15px;
+margin-left: 4%;
+background-color: red;
+border-color: white;
+font-family: Times New Roman, Times, serif;
+}

@@ -11,7 +11,54 @@
 <div class="container">
 
 
+
     <table class="mt-5">
+        <tr>
+            <th scope="row" th:text="${mainName}"></th>
+        </tr>
+
+        <tr>
+            <strong><th scope="row" th:text="'Price:'"></th></strong>
+            <td th:text="'$' + ${#numbers.formatDecimal(mainPrice, 0, 'COMMA', 2, 'POINT')}" class="pl-2"></td>
+        </tr>
+
+        <tr>
+            <strong><th scope="row" th:text="'Processing Speed:'"></th></strong>
+            <td th:text="${#numbers.formatDecimal(mainSpeed, 0, 'COMMA', 2, 'POINT')} + ' GHz'" class="pl-2"></td>
+        </tr>
+
+        <tr>
+            <strong><th scope="row" th:text="'Storage:'"></th></strong>
+            <td th:text="${#numbers.formatDecimal(mainStorage, 0, 'COMMA', 2, 'POINT')} + ' GB'" class="pl-2"></td>
+        </tr>
+    </table>
+    <br/>
+    <br/>
+
+    <table>
+        <tr>
+            <th scope="row" th:text="${otherName}"></th>
+        </tr>
+
+        <tr>
+            <strong><th scope="row" th:text="'Price:'"></th></strong>
+            <td th:text="'$' + ${#numbers.formatDecimal(otherPrice, 0, 'COMMA', 2, 'POINT')}" class="pl-2"></td>
+        </tr>
+
+        <tr>
+            <strong><th scope="row" th:text="'Processing Speed:'"></th></strong>
+            <td th:text="${#numbers.formatDecimal(otherSpeed, 0, 'COMMA', 2, 'POINT')} + ' GHz'" class="pl-2"></td>
+        </tr>
+
+        <tr>
+            <strong><th scope="row" th:text="'Storage:'"></th></strong>
+            <td th:text="${#numbers.formatDecimal(otherStorage, 0, 'COMMA', 2, 'POINT')} + ' GB'" class="pl-2"></td>
+        </tr>
+    </table>
+    <br/>
+    <br/>
+
+    <table>
         <tr>
             <th scope="row" th:text="${priceWarning}"></th>
             <td th:unless="${price} == 0" th:text="'$' + ${#numbers.formatDecimal(price, 0, 'COMMA', 2, 'POINT')}" class="pl-2"></td>

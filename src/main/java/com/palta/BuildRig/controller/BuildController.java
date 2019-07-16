@@ -47,8 +47,13 @@ public class BuildController {
     VideoCardDao videoCardDao;
 
 
+
     @RequestMapping(value = "",  method = RequestMethod.GET)
     public String rigList(Model model, HttpSession session) {
+
+        if (session.getAttribute("currentUser") == null) {
+            return "redirect:/account/login";
+        }
 
         String username = (String) session.getAttribute("currentUser");
         User user = userDao.findByEmail(username);
@@ -61,7 +66,12 @@ public class BuildController {
 
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String addRig(Model model){
+    public String addRig(Model model, HttpSession session){
+
+        if (session.getAttribute("currentUser") == null) {
+            return "redirect:/account/login";
+        }
+
         model.addAttribute("title", "New PC");
         model.addAttribute(new Pc());
 
@@ -71,6 +81,10 @@ public class BuildController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String add(Model model, @ModelAttribute @Valid Pc pc, HttpSession session) {
+
+        if (session.getAttribute("currentUser") == null) {
+            return "redirect:/account/login";
+        }
 
 
         String username = (String) session.getAttribute("currentUser");
@@ -82,10 +96,20 @@ public class BuildController {
 
 
     @RequestMapping(value = "/pc/{pcId}",  method = RequestMethod.GET)
-    public String creationPage(Model model, @PathVariable int pcId) {
+    public String creationPage(Model model, @PathVariable int pcId, HttpSession session) {
+
+        if (session.getAttribute("currentUser") == null) {
+            return "redirect:/account/login";
+        }
 
         hardwareType[] hardwareEnums = hardwareType.values();
         Pc foundRig = pcDao.findOne(pcId);
+
+        if(!foundRig.getUser().getEmail().equals(session.getAttribute("currentUser"))){
+            return "redirect:/buildRig";
+
+        }
+
 
         DecimalFormat goodFormat = new DecimalFormat("0.00");
 
@@ -101,12 +125,22 @@ public class BuildController {
     }
 
     @RequestMapping(value = "add-hardware", method = RequestMethod.GET)
-    public String hardwarePick(Model model, @RequestParam hardwareType hardwareEnums, @RequestParam int pcId) {
+    public String hardwarePick(Model model, @RequestParam hardwareType hardwareEnums, @RequestParam int pcId,
+                               HttpSession session) {
 
-        Pc rig = pcDao.findOne(pcId);
+        if (session.getAttribute("currentUser") == null) {
+            return "redirect:/account/login";
+        }
+
+        Pc pc = pcDao.findOne(pcId);
+
+        if(!pc.getUser().getEmail().equals(session.getAttribute("currentUser"))){
+            return "redirect:/buildRig";
+        }
+
         model.addAttribute("title", hardwareEnums.getName());
         model.addAttribute("Hardware", hardwareEnums);
-        model.addAttribute("foundRig",rig);
+        model.addAttribute("foundRig",pc);
 
         switch (hardwareEnums){
             case CPU:

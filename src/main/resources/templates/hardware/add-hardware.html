@@ -24,8 +24,8 @@
         <input th:field="*{itemPrice}" class="form-control"/>
         <br/>
 
-        <strong><label th:text="${value}"></label></strong>
-        <input th:field="*{pcValue}" class="form-control"/>
+        <strong><label th:unless="${value} == 'none'" th:text="${value}"></label></strong>
+        <input th:unless="${value} == 'none'" th:field="*{pcValue}" class="form-control"/>
         <br/>
 
 
