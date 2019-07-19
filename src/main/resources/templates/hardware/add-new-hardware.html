@@ -11,7 +11,7 @@
 <div class="container">
 
 
-    <h1 th:text="${title}"></h1>
+    <h1 th:text="${title} + ' (admin only)'"></h1>
 
     <div th:each="hardware : ${hardwareType}">
         <tr>
