@@ -37,8 +37,9 @@
             <span th:text="${emailError}"></span>
         </div>
 
-        <input type="submit" value="Register" class="btn btn-danger" style="border-radius: 12px; margin-left: 1%;"/>
-        <label class="mt-2"><a th:href="@{/account/login}" th:text="'Already have an account? Login here!'"></a></label>
+        <input type="submit" value="Register" class="btn btn-info" style="border-radius: 12px; margin-left: 1%;"/>
+        <label class="mt-2"><a th:href="@{/account/login}"
+                               th:text="'Already have an account? Login here!'" style="font-size: 15px;"></a></label>
     </form>
 </div>
 

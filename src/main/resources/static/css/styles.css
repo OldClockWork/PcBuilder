@@ -26,36 +26,51 @@
   background-color: #4CAF50;
 }
 
+
+.btn{
+background-color: teal;
+border-color: white;
+
+
+}
+
+.homeBody{
+background-color: teal;
+}
+
 .homeTitle{
 font-family: Times New Roman, Times, serif;
-color: white;
+color: black;
 text-align:center;
-padding-top: 60px;
-background-color: black;
+margin-top: 60px;
+
 
 }
 
 .homeDesc{
 
 text-align:center;
+font-size: 15pt;
 
 }
 
 #homeButton1{
 
+color: black;
 border-radius: 30px;
 font-size: 15px;
-background-color: red;
-border-color: white;
+background-color: white;
+border-color: teal;
 font-family: Times New Roman, Times, serif;
 
 }
 
 #homeButton2{
+color: black;
 border-radius: 30px;
 font-size: 15px;
 margin-left: 4%;
-background-color: red;
-border-color: white;
+background-color: white;
+border-color: teal;
 font-family: Times New Roman, Times, serif;
 }
