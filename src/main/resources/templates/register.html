@@ -27,7 +27,8 @@
 
         <div class="form-group">
             <label><strong>Validate Password</strong></label>
-            <input class="form-control" type="password"/>
+            <input class="form-control" type="password" name="passVal"/>
+            <span th:text="${valError}"></span>
         </div>
 
         <div class="form-group">

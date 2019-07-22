@@ -9,6 +9,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -30,24 +31,34 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String registerProcess(Model model, @ModelAttribute @Valid User user, Errors errors, HttpSession session){
+    public String registerProcess(Model model, @ModelAttribute @Valid User user, Errors errors,
+                                  HttpSession session, @RequestParam String passVal){
+
+
 
         if (errors.hasErrors()){
             model.addAttribute("title","REGISTER");
             return "register";
         }
 
+        if (!user.getPassword().equals(passVal)){
+            model.addAttribute("title","REGISTER");
+            model.addAttribute("valError","Password did not match");
+            return "register";
+        }
+
         User emailCheck = userDao.findByEmail(user.getEmail());
         User nameCheck = userDao.findByUsername(user.getUsername());
 
+
         if (emailCheck != null){
-            model.addAttribute("title","Register");
+            model.addAttribute("title","REGISTER");
             model.addAttribute("emailError","Email is already in use");
             return "register";
         }
 
         if (nameCheck != null){
-            model.addAttribute("title","Register");
+            model.addAttribute("title","REGISTER");
             model.addAttribute("userError","Name is already in use");
             return "register";
         }
@@ -71,16 +82,33 @@ public class AuthenticationController {
     public String loginProcess(Model model, HttpSession session, User user){
 
 
+
+
+        if (userDao.findByEmail(user.getEmail()) == null){
+            model.addAttribute("title","LOGIN");
+            model.addAttribute("emailError","Email does not exist");
+            return "login";
+        }
+
         User theUser = userDao.findByEmail(user.getEmail());
 
-        if (theUser.equals(null)){
-            model.addAttribute("title","Login");
+        if(!user.getPassword().equals(theUser.getPassword())){
+            model.addAttribute("title","LOGIN");
+            model.addAttribute("passwordError","Incorrect password");
             return "login";
-        } else {
+        }
+        else {
 
             session.setAttribute("currentUser", theUser.getEmail());
             return "redirect:/buildRig";
         }
+    }
+
+    @RequestMapping(value = "logout")
+    public String logoutProcess(HttpSession session){
+        session.removeAttribute("currentUser");
+
+        return "redirect:/";
     }
 
 }
