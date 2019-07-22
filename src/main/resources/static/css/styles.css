@@ -14,7 +14,7 @@
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  padding: 14px 40px;
   text-decoration: none;
 }
 
@@ -35,14 +35,15 @@ border-color: white;
 }
 
 .homeBody{
-background-color: teal;
+background-color: #A5AAE3;
 }
 
 .homeTitle{
 font-family: Times New Roman, Times, serif;
-color: black;
+color: #121B5A;
 text-align:center;
 margin-top: 60px;
+font-size: 100px
 
 
 }
@@ -56,21 +57,21 @@ font-size: 15pt;
 
 #homeButton1{
 
-color: black;
+color: red;
 border-radius: 30px;
 font-size: 15px;
 background-color: white;
-border-color: teal;
+border-color: red;
 font-family: Times New Roman, Times, serif;
 
 }
 
 #homeButton2{
-color: black;
+color: red;
 border-radius: 30px;
 font-size: 15px;
 margin-left: 4%;
 background-color: white;
-border-color: teal;
+border-color: red;
 font-family: Times New Roman, Times, serif;
 }
